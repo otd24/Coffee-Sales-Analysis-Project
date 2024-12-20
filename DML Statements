@@ -1,3 +1,8 @@
+## Data Ingestion
+# We wrote these SQL DML statements to ingest data from the original tables into the proposed normalized database.
+•	Used INSERT, DELETE, UPDATE to ingest data
+•	Used SELECT in between the process to check whether ingestion process is correct
+
 INSERT INTO…
 Insert Into cof_size (size_ID, size_description)
 Select distinct DENSE_RANK() over (order by size_drink), size_drink
