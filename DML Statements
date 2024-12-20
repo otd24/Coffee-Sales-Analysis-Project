@@ -1,0 +1,72 @@
+INSERT INTO…
+Insert Into cof_size (size_ID, size_description)
+Select distinct DENSE_RANK() over (order by size_drink), size_drink
+From coffee_v2;
+
+Insert Into cof_type (type_ID, type_description)
+Select distinct DENSE_RANK() over (order by product_type), product_type
+From coffee_v2;
+
+insert into store_location (store_ID,store_name)
+select distinct store_ID, store_location from coffee_v2;
+
+Insert Into cof_detail (detail_ID, detail_description)
+Select distinct DENSE_RANK() over (order by product_detail), product_detail
+From coffee_v2;
+
+Insert Into cof_category (category_ID, category_description)
+Select distinct DENSE_RANK() over (order by product_category), product_category
+From coffee_v2;
+
+INSERT INTO cof_product(
+    product_ID, detail_ID, type_ID, category_ID, size_ID, unit_price
+)
+SELECT  
+    distinct DENSE_RANK() over (order by c2.product_ID, c2.unit_price),
+    cd.detail_ID,
+    ct.type_ID,
+    cc.category_ID,
+    cs.size_ID,
+    c2.unit_price
+FROM coffee_v2 c2
+JOIN cof_detail cd ON cd.detail_description = c2.product_detail
+JOIN cof_type ct ON ct.type_description = c2.product_type
+JOIN cof_category cc ON cc.category_description = c2.product_category
+JOIN cof_size cs ON cs.size_description = c2.size_drink;
+
+
+INSERT INTO coffee_sales (
+    transaction_ID,
+    store_ID,
+    product_ID,
+    transaction_date,
+    transaction_qty,
+    total_bill,
+    transaction_time
+)
+SELECT 
+    c2.transaction_ID,
+    sl.store_ID,
+    cofp.product_ID,
+    c2.transaction_date,
+    c2.transaction_qty,
+    c2.total_bill,
+    c2.transaction_time
+FROM 
+    coffee_v2 c2
+JOIN 
+    store_location sl ON sl.store_name = c2.store_location
+JOIN 
+    cof_detail cd ON cd.detail_description = c2.product_detail
+JOIN 
+    cof_type ct ON ct.type_description = c2.product_type
+JOIN 
+    cof_category cc ON cc.category_description = c2.product_category
+JOIN 
+    cof_size cs ON cs.size_description = c2.size_drink
+JOIN 
+    cof_product cofp ON cofp.detail_ID = cd.detail_ID 
+    AND cofp.type_ID = ct.type_ID 
+    AND cofp.category_ID = cc.category_ID 
+    AND cofp.size_ID = cs.size_ID
+    AND cofp.unit_price = c2.unit_price;
