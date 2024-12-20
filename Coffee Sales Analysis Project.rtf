@@ -1,0 +1,282 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c0\c84706;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth12833\clftsWidth3 \clbrdrt\brdrs\brdrw20\brdrcf3 \clbrdrl\brdrs\brdrw20\brdrcf3 \clbrdrb\brdrs\brdrw20\brdrcf3 \clbrdrr\brdrs\brdrw20\brdrcf3 \clpadl144 \clpadr144 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\qj\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf2 \expnd0\expndtw0\kerning0
+DROP TABLE <table-name> CASCADE CONSTRAINTS;
+\f1 \
+
+\f0 \'85
+\f1 \
+
+\f0 -- Table: cof_category
+\f1 \
+
+\f0 CREATE TABLE cof_category (
+\f1 \
+
+\f0 \'a0\'a0\'a0 category_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 category_description varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT product_category_table_pk PRIMARY KEY (category_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: cof_detail
+\f1 \
+
+\f0 CREATE TABLE cof_detail (
+\f1 \
+
+\f0 \'a0\'a0\'a0 detail_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 detail_description varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT product_detail_table_pk PRIMARY KEY (detail_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: cof_product
+\f1 \
+
+\f0 CREATE TABLE cof_product (
+\f1 \
+
+\f0 \'a0\'a0\'a0 product_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 detail_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 type_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 category_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 unit_price float\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 size_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT coffee_product_pk PRIMARY KEY (product_ID,unit_price)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: cof_size
+\f1 \
+
+\f0 CREATE TABLE cof_size (
+\f1 \
+
+\f0 \'a0\'a0\'a0 size_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 size_description varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT size_table_pk PRIMARY KEY (size_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: cof_type
+\f1 \
+
+\f0 CREATE TABLE cof_type (
+\f1 \
+
+\f0 \'a0\'a0\'a0 type_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 type_description varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT product_type_table_pk PRIMARY KEY (type_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: coffee_sales
+\f1 \
+
+\f0 CREATE TABLE coffee_sales (
+\f1 \
+
+\f0 \'a0\'a0\'a0 transaction_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 store_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 product_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 transaction_date date\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 transaction_qty integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 total_bill float\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 transaction_time varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT coffee_v2_pk PRIMARY KEY (transaction_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Table: store_location
+\f1 \
+
+\f0 CREATE TABLE store_location (
+\f1 \
+
+\f0 \'a0\'a0\'a0 store_ID integer\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 store_name varchar2(100)\'a0 NOT NULL,
+\f1 \
+
+\f0 \'a0\'a0\'a0 CONSTRAINT store_location_pk PRIMARY KEY (store_ID)
+\f1 \
+
+\f0 ) ;
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- foreign keys
+\f1 \
+
+\f0 -- Reference: coffee_product_product category (table: cof_product)
+\f1 \
+
+\f0 ALTER TABLE cof_product ADD CONSTRAINT coffee_product_product_category
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (category_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES cof_category (category_ID);
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Reference: coffee_product_product_detail_table (table: cof_product)
+\f1 \
+
+\f0 ALTER TABLE cof_product ADD CONSTRAINT coffee_product_product_detail_table
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (detail_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES cof_detail (detail_ID);
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Reference: coffee_product_product_type_table (table: cof_product)
+\f1 \
+
+\f0 ALTER TABLE cof_product ADD CONSTRAINT coffee_product_product_type_table
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (type_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES cof_type (type_ID);
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Reference: coffee_product_size_table (table: cof_product)
+\f1 \
+
+\f0 ALTER TABLE cof_product ADD CONSTRAINT coffee_product_size_table
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (size_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES cof_size (size_ID);
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Reference: coffee_v2_coffee_product (table: coffee_sales)
+\f1 \
+
+\f0 ALTER TABLE coffee_sales ADD CONSTRAINT coffee_v2_coffee_product
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (product_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES cof_product (product_ID);
+\f1 \
+
+\f0 \'a0
+\f1 \
+
+\f0 -- Reference: coffee_v2_store_location (table: coffee_sales)
+\f1 \
+
+\f0 ALTER TABLE coffee_sales ADD CONSTRAINT coffee_v2_store_location
+\f1 \
+
+\f0 \'a0\'a0\'a0 FOREIGN KEY (store_ID)
+\f1 \
+
+\f0 \'a0\'a0\'a0 REFERENCES store_location (store_ID);
+\f1 \cell \lastrow\row
+}
